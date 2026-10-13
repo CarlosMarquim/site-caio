@@ -1,0 +1,54 @@
+# Publicação no Netlify: a pasta "site" é a raiz publicada (sem etapa de build).
+[build]
+  publish = "."
+
+# Páginas de condições do site antigo: redirecionamento TEMPORÁRIO (302) para a landing
+# enquanto as novas páginas de procedimentos não existem. Ao criar cada página, apague a linha correspondente.
+[[redirects]]
+  from = "/manguito-rotador"
+  to = "/#condicoes"
+  status = 302
+[[redirects]]
+  from = "/instabilidade-do-ombro"
+  to = "/#condicoes"
+  status = 302
+[[redirects]]
+  from = "/capsulite-adesiva"
+  to = "/#condicoes"
+  status = 302
+[[redirects]]
+  from = "/epicondilite"
+  to = "/#condicoes"
+  status = 302
+[[redirects]]
+  from = "/artrose-do-ombro"
+  to = "/#tratamentos"
+  status = 302
+[[redirects]]
+  from = "/artroscopia-do-ombro"
+  to = "/#tratamentos"
+  status = 302
+[[redirects]]
+  from = "/dor-no-ombro"
+  to = "/#condicoes"
+  status = 302
+
+# Segurança e cache
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    X-Frame-Options = "SAMEORIGIN"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Access-Control-Allow-Origin = "*"

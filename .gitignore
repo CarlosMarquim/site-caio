@@ -1,0 +1,13 @@
+# Arquivos originais grandes (ficam no disco, fora do histórico)
+MIDIAS/*.mp4
+MIDIAS/fotos-ensaio/
+MIDIAS/recortes-sem-fundo/
+MIDIAS/guia-de-marca/
+
+# Logs de testes automatizados
+.playwright-mcp/
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store

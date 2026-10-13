@@ -1,0 +1,155 @@
+/* Dr. Caio Rodrigo · interações da landing page (sem dependências) */
+(() => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isSmall = () => window.matchMedia('(max-width: 40em)').matches;
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  /* ---------- Cabeçalho: sombra depois que a página rola ---------- */
+  const header = $('.site-header');
+  const sentinel = document.createElement('div');
+  sentinel.setAttribute('aria-hidden', 'true');
+  sentinel.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:8px;pointer-events:none;';
+  document.body.prepend(sentinel);
+  new IntersectionObserver(([entry]) => {
+    header.classList.toggle('is-scrolled', !entry.isIntersecting);
+  }).observe(sentinel);
+
+  /* ---------- Revelação ao rolar (repete ao subir e descer) ----------
+     Dois observadores: um revela quando o elemento entra um pouco na tela;
+     o outro só "rearma" quando o elemento sai COMPLETAMENTE da tela,
+     para nada sumir enquanto ainda está visível. */
+  const revealEls = $$('[data-reveal]');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealEls.forEach((el) => el.classList.add('is-revealed'));
+  } else {
+    const showObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('is-revealed');
+      });
+    }, { rootMargin: '-4% 0px -10% 0px', threshold: 0 });
+
+    const resetObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) return;
+        const el = entry.target;
+        // Saiu por cima: na volta, entra descendo. Saiu por baixo: entra subindo.
+        el.dataset.from = entry.boundingClientRect.top < 0 ? 'above' : 'below';
+        el.classList.add('no-anim');
+        el.classList.remove('is-revealed');
+        void el.offsetWidth; // aplica o estado inicial sem transição, fora da tela
+        el.classList.remove('no-anim');
+      });
+    }, { threshold: 0 });
+
+    revealEls.forEach((el) => {
+      showObserver.observe(el);
+      resetObserver.observe(el);
+    });
+  }
+
+  /* ---------- Linha do tempo da consulta: a linha acompanha a leitura ---------- */
+  const steps = $('[data-steps]');
+  if (steps && !reduceMotion) {
+    const thresholds = Array.from({ length: 41 }, (_, i) => i / 40);
+    new IntersectionObserver(([entry]) => {
+      const past = entry.boundingClientRect.top < 0;
+      const progress = past ? 1 : entry.intersectionRatio;
+      steps.style.setProperty('--progress', progress.toFixed(3));
+    }, { threshold: thresholds, rootMargin: '0px 0px -30% 0px' }).observe(steps);
+  }
+
+  /* ---------- Menu do celular ---------- */
+  const menu = $('#menu-mobile');
+  const openBtn = $('.site-header .menu-toggle');
+  let lastFocus = null;
+
+  const openMenu = () => {
+    lastFocus = document.activeElement;
+    menu.hidden = false;
+    void menu.offsetHeight; // aplica o display antes da transição
+    menu.classList.add('is-open');
+    document.documentElement.classList.add('menu-open');
+    openBtn.setAttribute('aria-expanded', 'true');
+    $('a', menu)?.focus({ preventScroll: true });
+  };
+  const closeMenu = (restoreFocus = true) => {
+    menu.classList.remove('is-open');
+    document.documentElement.classList.remove('menu-open');
+    openBtn.setAttribute('aria-expanded', 'false');
+    const done = () => { if (!menu.classList.contains('is-open')) menu.hidden = true; };
+    if (reduceMotion) done(); else setTimeout(done, 300);
+    if (restoreFocus) (lastFocus || openBtn).focus({ preventScroll: true });
+  };
+  openBtn?.addEventListener('click', openMenu);
+  $('[data-menu-close]', menu)?.addEventListener('click', () => closeMenu());
+  $$('a', menu).forEach((a) => a.addEventListener('click', () => closeMenu(false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu.classList.contains('is-open')) closeMenu();
+    if (e.key === 'Tab' && menu.classList.contains('is-open')) {
+      const focusables = $$('a, button', menu).filter((el) => el.offsetParent !== null);
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  window.matchMedia('(min-width: 64em)').addEventListener('change', (e) => {
+    if (e.matches && menu.classList.contains('is-open')) closeMenu(false);
+  });
+
+  /* ---------- Vídeos: só carregam quando o paciente pede ---------- */
+  const players = new Set();
+  $$('[data-video]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const wrapper = document.createElement('div');
+      wrapper.className = link.className + ' is-playing';
+      wrapper.style.cssText = link.getAttribute('style') || '';
+
+      const video = document.createElement('video');
+      video.src = link.getAttribute('href');
+      video.controls = true;
+      video.playsInline = true;
+      video.preload = 'auto';
+      video.setAttribute('aria-label', link.getAttribute('aria-label').replace('Assistir ao ', ''));
+      const poster = $('img', link);
+      if (poster) video.poster = poster.currentSrc || poster.src;
+
+      wrapper.append(...link.childNodes, video);
+      link.replaceWith(wrapper);
+      players.add(video);
+
+      video.addEventListener('play', () => {
+        players.forEach((other) => { if (other !== video) other.pause(); });
+      });
+
+      const playPromise = video.play();
+      if (playPromise) playPromise.catch(() => {});
+      video.focus({ preventScroll: true });
+
+      // Depoimentos verticais: no celular, abrir em tela cheia para facilitar a leitura das legendas.
+      if (link.hasAttribute('data-fullscreen-mobile') && isSmall()) {
+        const fs = video.requestFullscreen || video.webkitRequestFullscreen;
+        if (fs) fs.call(video).catch?.(() => {});
+        else if (video.webkitEnterFullscreen) video.addEventListener('loadedmetadata', () => video.webkitEnterFullscreen(), { once: true });
+      }
+    });
+  });
+
+  /* ---------- Navegação: destaca a seção atual ---------- */
+  const navLinks = $$('.nav a[href^="#"]');
+  const sections = navLinks.map((a) => $(a.getAttribute('href'))).filter(Boolean);
+  if (sections.length) {
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach((a) => {
+          if (a.getAttribute('href') === '#' + entry.target.id) a.setAttribute('aria-current', 'true');
+          else a.removeAttribute('aria-current');
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach((s) => navObserver.observe(s));
+  }
+})();
