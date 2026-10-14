@@ -1466,6 +1466,11 @@ html.menu-open { overflow: hidden; }
   .js [data-reveal].is-revealed { opacity: 1; transform: none; }
   .js [data-reveal].no-anim { transition: none !important; }
 
+  /* Celular: a seção de condições (cartões de sinais) aparece pronta, sem revelação ao rolar */
+  @media (max-width: 39.99em) {
+    .js .conditions [data-reveal] { opacity: 1; transform: none; transition: none; }
+  }
+
   /* Entrada do topo (uma vez, ao carregar) */
   .js .hero [data-hero] {
     opacity: 0;
