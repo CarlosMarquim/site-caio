@@ -675,7 +675,7 @@ html.menu-open { overflow: hidden; }
   .credential,
   .credential + .credential {
     display: grid;
-    grid-template-columns: 4.5rem 1fr;
+    grid-template-columns: 5.5rem 1fr;
     align-items: center;
     gap: 1rem;
     padding: 1rem 0;
@@ -686,46 +686,62 @@ html.menu-open { overflow: hidden; }
 .credential__value {
   display: block;
   font-family: var(--font-display);
-  font-size: clamp(2.25rem, 1.8rem + 1.6vw, 3rem);
+  font-size: clamp(2.75rem, 2.2rem + 2vw, 3.5rem);
+  font-weight: 600;
   line-height: 1;
   color: var(--navy);
 }
 .credential__label {
   display: block;
   margin-top: 0.625rem;
-  font-size: 1rem;
-  line-height: 1.45;
-  color: var(--ink-soft);
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ink);
 }
 /* Sociedades médicas, na mesma faixa dos números */
 .societies {
   margin-top: 1.75rem;
-  padding-top: 1.5rem;
+  padding-top: 1.75rem;
   border-top: 1px solid var(--line-strong);
 }
 .societies__title {
-  display: block;
-  margin-bottom: 1rem;
-  font-size: 0.8125rem;
-  font-weight: 650;
-  letter-spacing: 0.14em;
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  margin-bottom: 1.25rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--navy);
+}
+.societies__title::before {
+  content: "";
+  flex: none;
+  width: 2.5rem;
+  height: 2px;
+  background: currentColor;
+}
+@media (max-width: 39.99em) {
+  .societies__title { gap: 0.625rem; letter-spacing: 0.08em; }
+  .societies__title::before { width: 1.5rem; }
 }
 .societies__list {
   list-style: none;
   display: grid;
-  gap: 1rem;
+  gap: 1.25rem;
 }
-.societies__list li { display: flex; flex-direction: column; gap: 0.125rem; }
+.societies__list li { display: flex; flex-direction: column; gap: 0.25rem; }
 .societies__list abbr {
   font-family: var(--font-display);
-  font-size: 1.5rem;
-  line-height: 1.15;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.1;
   color: var(--navy);
   text-decoration: none;
 }
-.societies__list span { font-size: 0.9375rem; line-height: 1.4; color: var(--ink-soft); max-width: 17rem; }
+.societies__list span { font-size: 1.0625rem; font-weight: 500; line-height: 1.4; color: var(--ink); max-width: 19rem; }
 @media (min-width: 40em) {
   .societies__list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
 }
