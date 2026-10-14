@@ -626,19 +626,33 @@ html.menu-open { overflow: hidden; }
   position: relative;
   background: var(--bg);
 }
+.credentials-card { position: relative; padding-block: 0.5rem 2.5rem; }
 .credentials {
   position: relative;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0;
-  padding-block: 0.5rem 2.5rem;
 }
 .credential {
   padding: 1.5rem 1rem 0.5rem 0;
   border-top: 1px solid var(--line-strong);
 }
-.credential:nth-child(odd) { padding-right: 1.25rem; }
+.credential + .credential { padding-left: 1rem; }
+/* Celular: um número por linha, com o texto ao lado */
+@media (max-width: 39.99em) {
+  .credentials { grid-template-columns: 1fr; }
+  .credential,
+  .credential + .credential {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+  .credential:first-child { border-top: 0; }
+  .credential__label { margin-top: 0; }
+}
 .credential__value {
   display: block;
   font-family: var(--font-display);
@@ -653,9 +667,41 @@ html.menu-open { overflow: hidden; }
   line-height: 1.45;
   color: var(--ink-soft);
 }
+/* Sociedades médicas, na mesma faixa dos números */
+.societies {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line-strong);
+}
+.societies__title {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 0.8125rem;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.societies__list {
+  list-style: none;
+  display: grid;
+  gap: 1rem;
+}
+.societies__list li { display: flex; flex-direction: column; gap: 0.125rem; }
+.societies__list abbr {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1.15;
+  color: var(--navy);
+  text-decoration: none;
+}
+.societies__list span { font-size: 0.9375rem; line-height: 1.4; color: var(--ink-soft); max-width: 17rem; }
+@media (min-width: 40em) {
+  .societies__list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+}
+
 @media (min-width: 56em) {
-  .credentials {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .credentials-card {
     margin-top: -3.5rem;
     padding: 2rem 2.25rem;
     border-radius: var(--r-card);
@@ -664,6 +710,11 @@ html.menu-open { overflow: hidden; }
   }
   .credential { padding: 0.25rem 1.5rem 0.25rem 0; border-top: 0; }
   .credential + .credential { padding-left: 1.75rem; border-left: 1px solid var(--line); }
+  .societies { margin-top: 1.75rem; padding-top: 1.75rem; border-top-color: var(--line); }
+  /* Alinha cada sociedade com a coluna do número de cima */
+  .societies__list { gap: 0; }
+  .societies__list li { padding-right: 1.5rem; }
+  .societies__list li + li { padding-left: 1.75rem; border-left: 1px solid var(--line); }
 }
 
 /* Retratos (seção Sobre): retângulo com cantos suaves */
@@ -715,31 +766,6 @@ html.menu-open { overflow: hidden; }
 .about__text p + p { margin-top: 1.125rem; }
 .about__text .about__intro { margin-top: 1.5rem; font-size: var(--fs-lead); color: var(--ink); }
 .about__text p:not(.about__intro) { color: var(--ink-soft); }
-.about__societies {
-  display: grid;
-  gap: 0.75rem;
-  margin-top: 2rem;
-  list-style: none;
-}
-@media (min-width: 40em) {
-  .about__societies { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
-.about__societies li {
-  display: flex;
-  flex-direction: column;
-  padding: 0.75rem 1.125rem;
-  border: 1px solid var(--line);
-  border-radius: var(--r-sm);
-  background: var(--surface);
-}
-.about__societies abbr {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  color: var(--navy);
-  text-decoration: none;
-  line-height: 1.2;
-}
-.about__societies span { font-size: 0.9375rem; line-height: 1.4; color: var(--ink-soft); max-width: 15rem; }
 
 @media (min-width: 56em) {
   .about__grid { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); }
