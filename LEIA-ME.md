@@ -6,7 +6,7 @@ A pasta **`site/`** é o site completo, pronto para publicar. É HTML, CSS e Jav
 
 ```
 Site Caio/
-├── site/                     ← o site (é esta pasta que vai para o Netlify)
+├── site/                     ← o site (é esta pasta que vai para a Vercel)
 │   ├── index.html            landing page (conteúdo, SEO e dados estruturados)
 │   ├── assets/css/styles.css visual, cores da marca, animações
 │   ├── assets/js/main.js     menu do celular, vídeos, animações ao rolar
@@ -15,6 +15,7 @@ Site Caio/
 │   ├── assets/logo/          logos da marca em SVG (azul e creme)
 │   ├── assets/fonts/         fontes Marcellus e Montserrat
 │   ├── robots.txt, sitemap.xml, site.webmanifest, favicon.ico
+│   └── vercel.json           redirecionamentos, cache e segurança na Vercel
 └── MIDIAS/                   ← arquivos originais (não vão para o site)
     ├── *.mp4 e imagem_*.jpg  vídeos e imagens de procedimentos originais
     ├── fotos-ensaio/         as 30 fotos do ensaio em alta resolução
@@ -31,9 +32,11 @@ python -m http.server 4173 --directory site
 
 Depois acesse http://localhost:4173
 
-## Publicar no Netlify
-- **Recomendado:** o Netlify está ligado ao GitHub; cada `git push` na `main` publica a pasta `site` sozinho (configurado no `netlify.toml`). Arrastar a pasta manualmente não aplica os redirecionamentos e cabeçalhos.
-- O arquivo `netlify.toml` (na raiz do repositório) já configura cache, segurança e redirecionamentos das páginas antigas (`/manguito-rotador` etc.).
+## Publicar na Vercel
+- O site está em https://site-caio-site.vercel.app/. A Vercel está ligada ao GitHub, com a pasta `site` como diretório raiz do projeto; cada `git push` na `main` publica sozinho.
+- O arquivo `site/vercel.json` configura cache, segurança e redirecionamentos das páginas antigas (`/manguito-rotador` etc.).
+- O `netlify.toml` (na raiz) é da hospedagem antiga no Netlify, que parou de publicar em 2026-10-14. Não é usado pela Vercel.
+- O cache de `assets/` dura 7 dias. Ao trocar um CSS, JS ou logo, aumente o `?v=` no endereço dele no `index.html` para os visitantes receberem a versão nova.
 
 ## O que o site tem hoje
 - **Topo:** foto do Dr. Caio de terno cinza (foto 4866), sem fundo e cortada da cintura para cima, à direita no computador e antes do texto no celular. Ao lado do nome fica o logo CR azul, sem círculo.
@@ -44,7 +47,7 @@ Depois acesse http://localhost:4173
 - **SEO:** título e descrição com "ortopedista ombro cotovelo Brasília", dados estruturados (médico, clínicas, perguntas frequentes e vídeos), sitemap e imagem de compartilhamento.
 
 ## Antes de publicar, confira
-1. **Domínio:** o site usa `https://drcaiorodrigo.netlify.app/` no canonical, no Open Graph, no sitemap e no schema. Se houver domínio próprio (ex.: `drcaiorodrigo.com.br`), faça localizar e substituir em `index.html`, `robots.txt` e `sitemap.xml`.
+1. **Domínio:** o site usa `https://site-caio-site.vercel.app/` no canonical, no Open Graph, no sitemap e no schema. Se houver domínio próprio (ex.: `drcaiorodrigo.com.br`), faça localizar e substituir em `index.html`, `robots.txt` e `sitemap.xml`.
 2. **"20+ anos":** o site antigo diz "20+ anos exclusivos em ombro e cotovelo". O guia de marca diz "mais de 15 anos de experiência". Confirme com o Dr. Caio qual número usar.
 3. **Fonte dos títulos:** o guia de marca usa a fonte *Athena*, que é paga e não está disponível para web. O site usa a *Marcellus*, a alternativa gratuita mais próxima. Se houver licença web da Athena, basta trocar o arquivo em `assets/fonts/` e o `@font-face` em `styles.css`.
 4. **Textos médicos:** as dúvidas frequentes e as descrições de condições foram escritas de forma prudente, sem promessas de resultado. Vale o Dr. Caio revisar. Os convênios aceitos não estão no site.
@@ -53,7 +56,7 @@ Depois acesse http://localhost:4173
 ## Páginas de procedimentos (próximo passo)
 - Crie cada página como uma pasta: `site/manguito-rotador/index.html`, `site/capsulite-adesiva/index.html` etc. Assim os endereços ficam iguais aos do site antigo, o que é bom para o Google.
 - Reaproveite o cabeçalho, o rodapé e o `styles.css` da landing.
-- Ao publicar cada página, apague o redirecionamento correspondente no `netlify.toml` e transforme o card da condição na landing em link (há um comentário no HTML indicando onde).
+- Ao publicar cada página, apague o redirecionamento correspondente no `site/vercel.json` e transforme o card da condição na landing em link (há um comentário no HTML indicando onde).
 - Adicione cada nova página ao `sitemap.xml`.
 
 ## Histórico de versões

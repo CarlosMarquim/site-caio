@@ -3,26 +3,26 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
-    <loc>https://drcaiorodrigo.netlify.app/</loc>
+    <loc>https://site-caio-site.vercel.app/</loc>
     <lastmod>2026-10-13</lastmod>
     <image:image>
-      <image:loc>https://drcaiorodrigo.netlify.app/assets/img/dr-caio-rodrigo-inicial-1500.webp</image:loc>
+      <image:loc>https://site-caio-site.vercel.app/assets/img/dr-caio-rodrigo-inicial-1500.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://drcaiorodrigo.netlify.app/assets/img/dr-caio-rodrigo-jaleco-1040.webp</image:loc>
+      <image:loc>https://site-caio-site.vercel.app/assets/img/dr-caio-rodrigo-jaleco-1040.webp</image:loc>
     </image:image>
     <video:video>
-      <video:thumbnail_loc>https://drcaiorodrigo.netlify.app/assets/img/poster-historia-dr-caio-1280.webp</video:thumbnail_loc>
+      <video:thumbnail_loc>https://site-caio-site.vercel.app/assets/img/poster-historia-dr-caio-1280.webp</video:thumbnail_loc>
       <video:title>Conheça o Dr. Caio Rodrigo, ortopedista de ombro e cotovelo</video:title>
       <video:description>Dr. Caio Rodrigo apresenta sua forma de cuidar de pacientes com dores no ombro e no cotovelo em Brasília.</video:description>
-      <video:content_loc>https://drcaiorodrigo.netlify.app/assets/video/historia-dr-caio-rodrigo.mp4</video:content_loc>
+      <video:content_loc>https://site-caio-site.vercel.app/assets/video/historia-dr-caio-rodrigo.mp4</video:content_loc>
       <video:duration>78</video:duration>
     </video:video>
     <video:video>
-      <video:thumbnail_loc>https://drcaiorodrigo.netlify.app/assets/img/poster-artroscopia-1280.webp</video:thumbnail_loc>
+      <video:thumbnail_loc>https://site-caio-site.vercel.app/assets/img/poster-artroscopia-1280.webp</video:thumbnail_loc>
       <video:title>Artroscopia do ombro: como funciona</video:title>
       <video:description>Explicação sobre a artroscopia do ombro, cirurgia minimamente invasiva feita por pequenos furinhos.</video:description>
-      <video:content_loc>https://drcaiorodrigo.netlify.app/assets/video/artroscopia-do-ombro.mp4</video:content_loc>
+      <video:content_loc>https://site-caio-site.vercel.app/assets/video/artroscopia-do-ombro.mp4</video:content_loc>
       <video:duration>34</video:duration>
     </video:video>
   </url>

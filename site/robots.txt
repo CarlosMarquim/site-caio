@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://drcaiorodrigo.netlify.app/sitemap.xml
+Sitemap: https://site-caio-site.vercel.app/sitemap.xml
