@@ -986,7 +986,7 @@ html.menu-open { overflow: hidden; }
   bottom: -2.5rem;
   width: 15rem;
   height: 20rem;
-  background: url("../logo/logo-icone-creme.svg") no-repeat center / contain;
+  background: url("../logo/logo-icone-creme.svg?v=3") no-repeat center / contain;
   opacity: 0.08;
   z-index: -1;
 }
@@ -1339,7 +1339,7 @@ html.menu-open { overflow: hidden; }
   top: -3rem;
   width: 22rem;
   height: 28rem;
-  background: url("../logo/logo-icone-navy.svg") no-repeat center / contain;
+  background: url("../logo/logo-icone-navy.svg?v=3") no-repeat center / contain;
   opacity: 0.05;
   z-index: -1;
 }
