@@ -38,7 +38,7 @@
   <link rel="preload" as="image" type="image/webp"
         imagesrcset="assets/img/dr-caio-rodrigo-inicial-520.webp 520w, assets/img/dr-caio-rodrigo-inicial-800.webp 800w, assets/img/dr-caio-rodrigo-inicial-1100.webp 1100w, assets/img/dr-caio-rodrigo-inicial-1500.webp 1500w"
         imagesizes="(min-width: 56em) 44vw, (min-width: 40em) 30rem, 92vw" fetchpriority="high">
-  <link rel="stylesheet" href="assets/css/styles.css?v=5">
+  <link rel="stylesheet" href="assets/css/styles.css?v=6">
   <script>document.documentElement.classList.add('js');</script>
 
   <!-- Dados estruturados (Google) -->
@@ -304,12 +304,22 @@
               Agendar consulta
               <span class="btn__arrow" aria-hidden="true"><svg class="icon"><use href="#i-arrow-right"/></svg></span>
             </a>
-            <a class="hero__phone" href="tel:+556133468470" data-cta="ligar-hero">
-              <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
-              <span>ou ligue <strong>(61) 3346-8470</strong></span>
-            </a>
+            <a class="btn btn--outline btn--hero-alt" href="#tratamentos" data-cta="procedimentos-hero">Conhecer procedimentos</a>
           </div>
-          <p class="hero__note" data-hero style="--i:5">Atendimento personalizado na <strong>Asa Sul, em Brasília</strong></p>
+          <ul class="hero__links" data-hero style="--i:5">
+            <li>
+              <a class="hero__link" href="tel:+556133468470" data-cta="ligar-hero">
+                <span class="hero__link-icon" aria-hidden="true"><svg class="icon"><use href="#i-phone"/></svg></span>
+                <span>Ligar <strong>(61) 3346-8470</strong></span>
+              </a>
+            </li>
+            <li>
+              <a class="hero__link" href="#contato" data-cta="locais-hero">
+                <span class="hero__link-icon" aria-hidden="true"><svg class="icon"><use href="#i-pin"/></svg></span>
+                <span>Ver locais na <strong>Asa Sul</strong></span>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </section>
