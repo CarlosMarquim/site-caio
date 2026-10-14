@@ -1,6 +1,6 @@
-# Publicação no Netlify: a pasta "site" é a raiz publicada (sem etapa de build).
+# Publicação no Netlify: a pasta "site" é publicada como raiz (sem etapa de build).
 [build]
-  publish = "."
+  publish = "site"
 
 # Páginas de condições do site antigo: redirecionamento TEMPORÁRIO (302) para a landing
 # enquanto as novas páginas de procedimentos não existem. Ao criar cada página, apague a linha correspondente.

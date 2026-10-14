@@ -14,7 +14,6 @@ Site Caio/
 │   ├── assets/video/         vídeos comprimidos para a web
 │   ├── assets/logo/          logos da marca em SVG (azul e creme)
 │   ├── assets/fonts/         fontes Marcellus e Montserrat
-│   ├── netlify.toml          cache, segurança e redirecionamentos
 │   ├── robots.txt, sitemap.xml, site.webmanifest, favicon.ico
 └── MIDIAS/                   ← arquivos originais (não vão para o site)
     ├── *.mp4 e imagem_*.jpg  vídeos e imagens de procedimentos originais
@@ -33,8 +32,8 @@ python -m http.server 4173 --directory site
 Depois acesse http://localhost:4173
 
 ## Publicar no Netlify
-- **Mais simples:** em app.netlify.com, abra o site atual e vá em *Deploys*. Arraste a pasta `site` para a área de upload.
-- O arquivo `netlify.toml` já configura cache, segurança e redirecionamentos das páginas antigas (`/manguito-rotador` etc.).
+- **Recomendado:** o Netlify está ligado ao GitHub; cada `git push` na `main` publica a pasta `site` sozinho (configurado no `netlify.toml`). Arrastar a pasta manualmente não aplica os redirecionamentos e cabeçalhos.
+- O arquivo `netlify.toml` (na raiz do repositório) já configura cache, segurança e redirecionamentos das páginas antigas (`/manguito-rotador` etc.).
 
 ## O que o site tem hoje
 - **Topo:** foto do Dr. Caio de terno cinza (foto 4866), sem fundo e cortada da cintura para cima, à direita no computador e antes do texto no celular. Ao lado do nome fica o logo CR azul, sem círculo.
