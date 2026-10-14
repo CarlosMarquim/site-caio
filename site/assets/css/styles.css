@@ -518,6 +518,9 @@ html.menu-open { overflow: hidden; }
   color: var(--ink);
   max-width: 30rem;
 }
+/* Quebras de linha só no desktop; no celular o texto corre livre */
+.br-desk { display: none; }
+@media (min-width: 56em) { .br-desk { display: inline; } }
 .hero__rule {
   display: block;
   width: min(100%, 30rem);
