@@ -15,26 +15,39 @@
     header.classList.toggle('is-scrolled', !entry.isIntersecting);
   }).observe(sentinel);
 
-  /* ---------- Revelação ao rolar (repete ao subir e descer) ----------
-     Dois observadores: um revela quando o elemento entra um pouco na tela;
-     o outro só "rearma" quando o elemento sai COMPLETAMENTE da tela,
-     para nada sumir enquanto ainda está visível. */
+  /* ---------- Revelação ao rolar (só quando a página desce) ----------
+     Rolando para baixo, os elementos entram pela parte de baixo da tela e animam.
+     Rolando para cima, os elementos que entram pelo topo aparecem prontos, sem animação.
+     Um elemento só "rearma" quando sai COMPLETAMENTE pela parte de baixo da tela
+     (a pessoa subiu além dele), para animar de novo quando ela voltar a descer. */
   const revealEls = $$('[data-reveal]');
   if (reduceMotion || !('IntersectionObserver' in window)) {
     revealEls.forEach((el) => el.classList.add('is-revealed'));
   } else {
+    const showInstantly = (el) => {
+      el.classList.add('no-anim', 'is-revealed');
+      void el.offsetWidth;
+      el.classList.remove('no-anim');
+    };
+
     const showObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add('is-revealed');
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        if (el.classList.contains('is-revealed')) return;
+        // Entrando pelo topo da tela = a página está subindo: sem animação.
+        const enteringFromTop = entry.boundingClientRect.top < entry.rootBounds.top;
+        if (enteringFromTop) showInstantly(el);
+        else el.classList.add('is-revealed');
       });
     }, { rootMargin: '-4% 0px -10% 0px', threshold: 0 });
 
     const resetObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) return;
+        // Saiu por cima (a página desceu além dele): continua visível, sem rearmar.
+        if (entry.boundingClientRect.top < 0) return;
         const el = entry.target;
-        // Saiu por cima: na volta, entra descendo. Saiu por baixo: entra subindo.
-        el.dataset.from = entry.boundingClientRect.top < 0 ? 'above' : 'below';
         el.classList.add('no-anim');
         el.classList.remove('is-revealed');
         void el.offsetWidth; // aplica o estado inicial sem transição, fora da tela

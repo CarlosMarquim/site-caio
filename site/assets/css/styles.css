@@ -1395,8 +1395,8 @@ html.menu-open { overflow: hidden; }
    1. Textos [data-reveal]: aparecem com fade e sobem poucos pixels.
    2. Blocos [data-reveal="slide"] (cartões, fotos, vídeos): deslizam com mais distância e assentam suavemente.
    3. Mídias [data-parallax] e pôsteres de vídeo: a imagem desliza devagar dentro da moldura enquanto a página rola.
-   As camadas 1 e 2 reiniciam quando o elemento sai da tela, então animam de novo ao subir e descer.
-   O lado de entrada é respeitado: vindo de baixo sobe; vindo de cima desce. */
+   As camadas 1 e 2 só animam quando a página desce. Ao subir, os elementos aparecem prontos;
+   quem saiu pela parte de baixo da tela anima de novo quando a pessoa voltar a descer. */
 @media (prefers-reduced-motion: no-preference) {
   .js [data-reveal] {
     --reveal-shift: 18px;
@@ -1407,7 +1407,6 @@ html.menu-open { overflow: hidden; }
       transform 900ms var(--ease-out);
     transition-delay: calc(var(--i, 0) * 80ms);
   }
-  .js [data-reveal][data-from="above"] { --reveal-shift: -18px; }
 
   .js [data-reveal="slide"] {
     --reveal-shift: 72px;
@@ -1417,7 +1416,6 @@ html.menu-open { overflow: hidden; }
       transform 1300ms var(--ease-out);
     transition-delay: calc(var(--i, 0) * 110ms);
   }
-  .js [data-reveal="slide"][data-from="above"] { --reveal-shift: -72px; }
 
   .js [data-reveal].is-revealed { opacity: 1; transform: none; }
   .js [data-reveal].no-anim { transition: none !important; }
