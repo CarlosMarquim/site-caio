@@ -860,6 +860,9 @@ html.menu-open { overflow: hidden; }
   object-fit: cover;
 }
 .video video { background: #000; z-index: 2; }
+/* Em tela cheia o vídeo aparece inteiro, sem corte */
+.video video:fullscreen { object-fit: contain; }
+.video video:-webkit-full-screen { object-fit: contain; }
 .video img { transition: transform 900ms var(--ease-out); }
 .video::after {
   content: "";

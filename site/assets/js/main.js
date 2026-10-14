@@ -137,6 +137,21 @@
         players.forEach((other) => { if (other !== video) other.pause(); });
       });
 
+      // Tela cheia no celular: vídeo deitado gira a tela para horizontal (Android).
+      // No iPhone o player nativo já acompanha o giro do aparelho.
+      const onFullscreenChange = () => {
+        const fsEl = document.fullscreenElement || document.webkitFullscreenElement;
+        const orientation = screen.orientation;
+        if (!orientation || !orientation.lock) return;
+        if (fsEl === video) {
+          if (video.videoWidth > video.videoHeight) orientation.lock('landscape').catch(() => {});
+        } else {
+          try { orientation.unlock(); } catch (_) {}
+        }
+      };
+      document.addEventListener('fullscreenchange', onFullscreenChange);
+      document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+
       const playPromise = video.play();
       if (playPromise) playPromise.catch(() => {});
       video.focus({ preventScroll: true });
