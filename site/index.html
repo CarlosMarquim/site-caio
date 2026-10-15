@@ -38,7 +38,7 @@
   <link rel="preload" as="image" type="image/webp"
         imagesrcset="assets/img/dr-caio-rodrigo-inicial-520.webp 520w, assets/img/dr-caio-rodrigo-inicial-800.webp 800w, assets/img/dr-caio-rodrigo-inicial-1100.webp 1100w, assets/img/dr-caio-rodrigo-inicial-1500.webp 1500w"
         imagesizes="(min-width: 56em) 44vw, (min-width: 40em) 30rem, 92vw" fetchpriority="high">
-  <link rel="stylesheet" href="assets/css/styles.css?v=13">
+  <link rel="stylesheet" href="assets/css/styles.css?v=14">
   <script>document.documentElement.classList.add('js');</script>
 
   <!-- Dados estruturados (Google) -->
@@ -293,44 +293,25 @@
 
       <div class="container hero__inner">
         <div class="hero__content">
-          <div class="hero__credential" data-hero style="--i:0">
-            <strong>Dr. Caio Rodrigo</strong>
-            <span>CRM-DF 11.815 | RQE 7958</span>
-          </div>
+          <p class="hero__eyebrow" data-hero style="--i:0">CRM-DF 11.815 · RQE 7958</p>
 
-          <h1 id="titulo-principal" data-hero style="--i:1">Ortopedista de <span class="hero__accent">ombro e cotovelo</span> em Brasília</h1>
-          <p class="hero__lead" data-hero style="--i:2">Encontre alívio e qualidade de vida <br class="br-desk">para seu ombro ou cotovelo <br class="br-desk">com tratamentos modernos e eficazes.</p>
+          <!-- Nome e especialidade no mesmo h1: o visual segue o print, e a busca continua lendo "ortopedista de ombro e cotovelo em Brasília" -->
+          <h1 id="titulo-principal">
+            <span class="hero__name" data-hero style="--i:1">Dr. Caio Rodrigo</span>
+            <span class="hero__role" data-hero style="--i:2">Ortopedista de ombro e cotovelo em Brasília</span>
+          </h1>
           <span class="hero__rule" data-hero style="--i:3" aria-hidden="true"></span>
+          <p class="hero__lead" data-hero style="--i:4">Encontre alívio e qualidade de vida para seu ombro ou cotovelo com tratamentos modernos e eficazes.</p>
 
-          <div class="hero__ctas" data-hero style="--i:4">
+          <div class="hero__ctas" data-hero style="--i:5">
             <a class="btn btn--primary btn--hero" href="https://wa.me/5561974023223?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20uma%20consulta%20com%20o%20Dr.%20Caio%20Rodrigo." target="_blank" rel="noopener" data-cta="whatsapp-hero">
               Agendar consulta
-              <span class="btn__arrow" aria-hidden="true"><svg class="icon"><use href="#i-arrow-right"/></svg></span>
+              <span class="btn__badge" aria-hidden="true"><svg class="icon"><use href="#i-whatsapp"/></svg></span>
             </a>
-            <a class="btn btn--outline btn--hero-alt" href="#tratamentos" data-cta="procedimentos-hero">Conhecer procedimentos</a>
+            <a class="btn btn--outline btn--hero-phone" href="tel:+556133468470" aria-label="Ligar para (61) 3346-8470" data-cta="ligar-hero">
+              <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>(61) 3346-8470
+            </a>
           </div>
-          <ul class="hero__links" data-hero style="--i:5">
-            <li>
-              <a class="hero__link" href="tel:+556133468470" data-cta="ligar-hero">
-                <span class="hero__link-icon" aria-hidden="true"><svg class="icon"><use href="#i-phone"/></svg></span>
-                <span class="hero__link-text">
-                  <span class="hero__link-label">Ligar agora</span>
-                  <strong>(61) 3346-8470</strong>
-                </span>
-                <svg class="icon hero__link-arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg>
-              </a>
-            </li>
-            <li>
-              <a class="hero__link" href="#contato" data-cta="locais-hero">
-                <span class="hero__link-icon" aria-hidden="true"><svg class="icon"><use href="#i-pin"/></svg></span>
-                <span class="hero__link-text">
-                  <span class="hero__link-label">Ver endereços</span>
-                  <strong>Asa Sul, Brasília</strong>
-                </span>
-                <svg class="icon hero__link-arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg>
-              </a>
-            </li>
-          </ul>
         </div>
       </div>
     </section>

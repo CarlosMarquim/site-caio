@@ -490,63 +490,47 @@ html.menu-open { overflow: hidden; }
   margin-top: -0.5rem;
 }
 
-.hero__credential {
+/* Ordem do texto: CRM em versalete, nome grande (Marcellus), especialidade, filete curto, frase e botões */
+.hero__eyebrow {
+  margin-bottom: 0.875rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+.hero h1 {
   display: flex;
   flex-direction: column;
   align-items: inherit;
-  gap: 0.75rem;
-  margin-bottom: 1.75rem;
+  gap: 0.875rem;
 }
-.hero__credential strong {
+.hero__name {
   display: block;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(2.5rem, 10vw, 3.75rem);
-  color: var(--navy);
-  line-height: 1;
-  letter-spacing: -0.015em;
+  font-size: clamp(2.25rem, 1.25rem + 5.2vw, 4.5rem);
+  line-height: 1.05;
 }
-.hero__credential span {
+.hero__role {
   display: block;
-  padding-top: 0.875rem;
-  border-top: 2px solid var(--navy);
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-}
-
-.hero h1 {
-  font-size: clamp(2.25rem, 1.6rem + 3vw, 4.25rem);
-  line-height: 1.08;
-}
-.hero__accent {
+  font-family: var(--font-body);
+  font-size: clamp(1.1875rem, 1.05rem + 0.6vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0;
   color: var(--slate);
-  background-image: linear-gradient(rgba(75, 100, 131, 0.55), rgba(75, 100, 131, 0.55));
-  background-repeat: no-repeat;
-  background-position: 0 96%;
-  background-size: 100% 2px;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-  padding-bottom: 0.06em;
 }
-.hero__lead {
-  margin-top: 1.5rem;
-  font-size: var(--fs-lead);
-  color: var(--ink);
-  max-width: 30rem;
-}
-/* Quebras de linha só no desktop; no celular o texto corre livre */
-.br-desk { display: none; }
-@media (min-width: 56em) { .br-desk { display: inline; } }
 .hero__rule {
   display: block;
-  width: min(100%, 30rem);
+  width: 4.5rem;
   height: 1.5px;
-  margin: 2rem 0;
-  background: rgba(8, 24, 58, 0.3);
-  transform-origin: left;
+  margin: 1.75rem 0 1.5rem;
+  background: var(--mist);
+}
+.hero__lead {
+  font-size: var(--fs-lead);
+  color: var(--ink);
+  max-width: 33rem;
 }
 .hero__ctas {
   display: flex;
@@ -554,88 +538,39 @@ html.menu-open { overflow: hidden; }
   align-items: center;
   gap: 1rem;
   width: 100%;
+  margin-top: 2rem;
+}
+.btn--hero,
+.btn--hero-phone {
+  min-height: 3.625rem;
+  width: min(100%, 22rem);
 }
 .btn--hero {
-  min-height: 4.25rem;
-  padding: 0.5rem 0.5rem 0.5rem 2rem;
-  gap: 1.5rem;
-  font-size: 1.125rem;
-  width: min(100%, 22rem);
+  padding: 0.5rem 0.5rem 0.5rem 1.625rem;
+  gap: 1rem;
   justify-content: space-between;
 }
-.btn__arrow {
+/* Círculo translúcido com o WhatsApp dentro do botão principal */
+.btn__badge {
   display: grid;
   place-items: center;
-  width: 3.25rem;
-  height: 3.25rem;
+  width: 2.625rem;
+  height: 2.625rem;
   border-radius: 50%;
-  background: var(--surface);
-  color: var(--navy);
-  transition: transform var(--dur) var(--ease-out);
-}
-.btn__arrow .icon { width: 1.375rem; height: 1.375rem; }
-@media (hover: hover) {
-  .btn--hero:hover .btn__arrow { transform: translateX(4px); }
-}
-/* Botão secundário: mesma altura do principal, sem disputar atenção */
-.btn--hero-alt {
-  min-height: 4.25rem;
-  padding-inline: 2rem;
-  font-size: 1.125rem;
-  width: min(100%, 22rem);
-}
-
-/* Atalhos abaixo dos botões (telefone e locais): cartões com cara de botão,
-   ícone preenchido, texto de ação e seta, para o público 70+ perceber que dá para tocar */
-.hero__links {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  width: 100%;
-  margin-top: 1.25rem;
-}
-.hero__links li { width: min(100%, 22rem); }
-.hero__link {
-  display: flex;
-  align-items: center;
-  gap: 0.875rem;
-  width: 100%;
-  min-height: 4rem;
-  padding: 0.625rem 1rem 0.625rem 0.625rem;
-  border: 1.5px solid var(--line-strong);
-  border-radius: var(--r-pill);
-  background: var(--surface);
-  box-shadow: 0 6px 16px -10px rgba(8, 24, 58, 0.35);
-  color: var(--navy);
-  text-align: left;
-  text-decoration: none;
-  transition:
-    border-color var(--dur) var(--ease-out),
-    box-shadow var(--dur) var(--ease-out),
-    transform var(--dur-fast) var(--ease-out);
-}
-.hero__link:active { transform: scale(0.98); }
-.hero__link-icon {
-  display: grid;
-  place-items: center;
-  flex: none;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 50%;
-  background: var(--navy);
+  background: rgba(242, 229, 213, 0.14);
   color: var(--cream);
+  transition: background-color var(--dur) var(--ease-out);
 }
-.hero__link-icon .icon { width: 1.25rem; height: 1.25rem; }
-.hero__link-text { display: flex; flex-direction: column; gap: 0.125rem; flex: 1; min-width: 0; line-height: 1.2; }
-.hero__link-label { font-size: 0.9375rem; font-weight: 500; color: var(--ink-soft); }
-.hero__link strong { font-size: 1.0625rem; font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; }
-.hero__link-arrow { flex: none; width: 1.25rem; height: 1.25rem; color: var(--navy); transition: transform var(--dur) var(--ease-out); }
+.btn .btn__badge .icon { width: 1.25rem; height: 1.25rem; }
 @media (hover: hover) {
-  .hero__link:hover { border-color: var(--navy); box-shadow: 0 10px 22px -12px rgba(8, 24, 58, 0.45); }
-  .hero__link:hover .hero__link-arrow { transform: translateX(4px); }
+  .btn--hero:hover .btn__badge { background: rgba(242, 229, 213, 0.22); }
 }
+.btn--hero-phone {
+  padding-inline: 1.75rem;
+  gap: 0.875rem;
+  background: var(--surface);
+}
+.btn--hero-phone .icon { width: 1.25rem; height: 1.25rem; color: var(--slate); }
 
 /* Tablet: foto um pouco maior */
 @media (min-width: 40em) and (max-width: 55.99em) {
@@ -677,16 +612,12 @@ html.menu-open { overflow: hidden; }
     margin-top: 0;
     max-width: 36rem;
   }
-  .hero h1 { max-width: 13ch; }
-  .hero__ctas { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 1rem; width: auto; }
-  .hero__ctas { flex-wrap: nowrap; }
+  /* Em telas de notebook menores a frase quebra mais cedo para não encostar no ombro da foto */
+  .hero__rule { transform-origin: left; }
+  .hero__lead { max-width: min(33rem, 46vw); }
+  .hero__ctas { flex-direction: row; flex-wrap: nowrap; align-items: center; width: auto; }
   .btn--hero,
-  .btn--hero-alt { width: auto; font-size: 1.0625rem; }
-  .btn--hero { padding-left: 1.75rem; gap: 1rem; }
-  .btn--hero-alt { padding-inline: 1.625rem; }
-  .hero__links { flex-direction: row; align-items: stretch; width: auto; gap: 1rem; }
-  .hero__links li { width: auto; }
-  .hero__link { min-width: 15rem; }
+  .btn--hero-phone { width: auto; }
 }
 
 /* Faixa de credenciais */
@@ -1500,8 +1431,7 @@ html.menu-open { overflow: hidden; }
     animation-delay: calc(120ms + var(--i, 0) * 110ms);
   }
   .js .hero__photo picture img { opacity: 0; transform: translate3d(0, 56px, 0); animation: photo-in 1500ms var(--ease-out) 150ms forwards; }
-  .js .hero__accent { background-size: 0% 2px; animation: underline-in 900ms var(--ease-out) 900ms forwards; }
-  .js .hero .hero__rule { transform: scaleX(0); animation: rule-in 1000ms var(--ease-out) 650ms forwards; }
+  .js .hero .hero__rule { opacity: 1; transform: scaleX(0); animation: rule-in 1000ms var(--ease-out) 650ms forwards; }
   .js .whatsapp-fab { animation: fab-in 600ms var(--ease-out) 1200ms backwards; }
 
   .js .steps::after { --progress: 0; transition: transform 60ms linear; }
@@ -1510,7 +1440,6 @@ html.menu-open { overflow: hidden; }
 @keyframes hero-in { to { opacity: 1; transform: none; } }
 @keyframes photo-in { to { opacity: 1; transform: none; } }
 @keyframes emblem-in { to { opacity: var(--emblem-opacity, 0.08); } }
-@keyframes underline-in { to { background-size: 100% 2px; } }
 @keyframes rule-in { to { transform: scaleX(1); } }
 @keyframes fab-in { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: none; } }
 
