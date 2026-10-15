@@ -72,6 +72,7 @@
 
   /* Movimento */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-soft: cubic-bezier(0.33, 1, 0.68, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --dur-fast: 180ms;
   --dur: 280ms;
@@ -1396,23 +1397,24 @@ html.menu-open { overflow: hidden; }
    As camadas 1 e 2 só animam quando a página desce. Ao subir, os elementos aparecem prontos;
    quem saiu pela parte de baixo da tela anima de novo quando a pessoa voltar a descer. */
 @media (prefers-reduced-motion: no-preference) {
+  /* O fade usa uma curva mais suave que o deslize: com a curva rápida ele terminava em ~150ms e passava despercebido */
   .js [data-reveal] {
-    --reveal-shift: 16px;
+    --reveal-shift: 24px;
     opacity: 0;
     transform: translate3d(0, var(--reveal-shift), 0);
     transition:
-      opacity 450ms var(--ease-out),
-      transform 600ms var(--ease-out);
-    transition-delay: calc(var(--i, 0) * 50ms);
+      opacity 650ms var(--ease-out-soft),
+      transform 850ms var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 70ms);
   }
 
   .js [data-reveal="slide"] {
-    --reveal-shift: 40px;
-    transform: translate3d(0, var(--reveal-shift), 0) scale(0.98);
+    --reveal-shift: 56px;
+    transform: translate3d(0, var(--reveal-shift), 0) scale(0.97);
     transition:
-      opacity 500ms var(--ease-out),
-      transform 750ms var(--ease-out);
-    transition-delay: calc(var(--i, 0) * 60ms);
+      opacity 750ms var(--ease-out-soft),
+      transform 1000ms var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 90ms);
   }
 
   .js [data-reveal].is-revealed { opacity: 1; transform: none; }

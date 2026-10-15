@@ -20,12 +20,13 @@
      Rolando para cima, os elementos que entram pelo topo aparecem prontos, sem animação.
      Um elemento só "rearma" quando sai COMPLETAMENTE pela parte de baixo da tela
      (a pessoa subiu além dele), para animar de novo quando ela voltar a descer.
-     A animação começa um pouco ANTES de o elemento chegar à tela (margem de baixo positiva),
-     compensando o deslocamento inicial, para nunca parecer que a página acabou.
+     A animação começa quando o elemento chega à borda de baixo da tela: a margem positiva
+     compensa o deslocamento inicial dos blocos (56px no CSS), então não sobra faixa vazia
+     e a pessoa ainda vê o movimento inteiro.
      As duas observações usam a mesma margem de baixo, senão um elemento rearmado
      dentro dessa faixa ficaria invisível. */
   const revealEls = $$('[data-reveal]');
-  const revealBottom = '8%';
+  const revealBottom = '48px';
   if (reduceMotion || !('IntersectionObserver' in window)) {
     revealEls.forEach((el) => el.classList.add('is-revealed'));
   } else {
