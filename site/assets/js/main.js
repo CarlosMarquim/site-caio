@@ -19,8 +19,13 @@
      Rolando para baixo, os elementos entram pela parte de baixo da tela e animam.
      Rolando para cima, os elementos que entram pelo topo aparecem prontos, sem animação.
      Um elemento só "rearma" quando sai COMPLETAMENTE pela parte de baixo da tela
-     (a pessoa subiu além dele), para animar de novo quando ela voltar a descer. */
+     (a pessoa subiu além dele), para animar de novo quando ela voltar a descer.
+     A animação começa um pouco ANTES de o elemento chegar à tela (margem de baixo positiva),
+     compensando o deslocamento inicial, para nunca parecer que a página acabou.
+     As duas observações usam a mesma margem de baixo, senão um elemento rearmado
+     dentro dessa faixa ficaria invisível. */
   const revealEls = $$('[data-reveal]');
+  const revealBottom = '8%';
   if (reduceMotion || !('IntersectionObserver' in window)) {
     revealEls.forEach((el) => el.classList.add('is-revealed'));
   } else {
@@ -40,7 +45,7 @@
         if (enteringFromTop) showInstantly(el);
         else el.classList.add('is-revealed');
       });
-    }, { rootMargin: '-4% 0px -10% 0px', threshold: 0 });
+    }, { rootMargin: `-4% 0px ${revealBottom} 0px`, threshold: 0 });
 
     const resetObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -53,7 +58,7 @@
         void el.offsetWidth; // aplica o estado inicial sem transição, fora da tela
         el.classList.remove('no-anim');
       });
-    }, { threshold: 0 });
+    }, { rootMargin: `0px 0px ${revealBottom} 0px`, threshold: 0 });
 
     revealEls.forEach((el) => {
       showObserver.observe(el);

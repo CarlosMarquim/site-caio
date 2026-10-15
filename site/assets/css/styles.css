@@ -1397,22 +1397,22 @@ html.menu-open { overflow: hidden; }
    quem saiu pela parte de baixo da tela anima de novo quando a pessoa voltar a descer. */
 @media (prefers-reduced-motion: no-preference) {
   .js [data-reveal] {
-    --reveal-shift: 18px;
+    --reveal-shift: 16px;
     opacity: 0;
     transform: translate3d(0, var(--reveal-shift), 0);
     transition:
-      opacity 750ms var(--ease-out),
-      transform 900ms var(--ease-out);
-    transition-delay: calc(var(--i, 0) * 80ms);
+      opacity 450ms var(--ease-out),
+      transform 600ms var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 50ms);
   }
 
   .js [data-reveal="slide"] {
-    --reveal-shift: 72px;
-    transform: translate3d(0, var(--reveal-shift), 0) scale(0.97);
+    --reveal-shift: 40px;
+    transform: translate3d(0, var(--reveal-shift), 0) scale(0.98);
     transition:
-      opacity 900ms var(--ease-out),
-      transform 1300ms var(--ease-out);
-    transition-delay: calc(var(--i, 0) * 110ms);
+      opacity 500ms var(--ease-out),
+      transform 750ms var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 60ms);
   }
 
   .js [data-reveal].is-revealed { opacity: 1; transform: none; }
