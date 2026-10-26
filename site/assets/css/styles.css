@@ -870,12 +870,14 @@ html.menu-open { overflow: hidden; }
   transition: transform var(--dur) var(--ease-out), background-color var(--dur) var(--ease-out);
 }
 .video__play .icon { width: 34%; height: 34%; margin-left: 7%; }
-.video--tall .video__play { top: 60%; width: clamp(2.75rem, 21cqi, 6rem); height: clamp(2.75rem, 21cqi, 6rem); border-width: 2.5px; }
+.video--tall .video__title { bottom: 11%; }
+.video--tall .video__play { top: 66%; width: clamp(2.75rem, 21cqi, 6rem); height: clamp(2.75rem, 21cqi, 6rem); border-width: 2.5px; }
 /* Cartões estreitos (dois lado a lado no celular): fica só a duração no rodapé */
 @container (max-width: 14rem) {
-  .video__label { justify-content: flex-end; }
+  .video .video__label { justify-content: flex-end; }
   .video__label > span { display: none; }
-  .video--tall .video__title { bottom: 12%; }
+  .video--tall .video__title { bottom: 10%; }
+  .video--tall .video__play { top: 61%; }
 }
 .video--wide .video__play,
 .treatment__media .video__play { left: 41%; top: 47%; }
