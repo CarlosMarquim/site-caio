@@ -119,15 +119,26 @@
 
   /* ---------- Vídeos: só carregam quando o paciente pede ---------- */
   const players = new Set();
+  // Celular ou internet lenta: usa a versão em 360p, que começa a tocar com bem menos dados.
+  // No celular só usa a versão maior com internet muito boa (o Chrome informa no máximo 10 Mb/s).
+  const preferSmallVideo = () => {
+    const conn = navigator.connection;
+    if (conn && (conn.saveData || /(^|-)2g|3g/.test(conn.effectiveType || ''))) return true;
+    return isSmall() && !(conn && conn.downlink >= 10);
+  };
   $$('[data-video]').forEach((link) => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const wrapper = document.createElement('div');
-      wrapper.className = link.className + ' is-playing';
+      wrapper.className = link.className + ' is-playing is-loading';
       wrapper.style.cssText = link.getAttribute('style') || '';
 
       const video = document.createElement('video');
-      video.src = link.getAttribute('href');
+      const smallSrc = link.dataset.srcSmall;
+      video.src = smallSrc && preferSmallVideo() ? smallSrc : link.getAttribute('href');
+      video.addEventListener('playing', () => wrapper.classList.remove('is-loading'));
+      video.addEventListener('waiting', () => wrapper.classList.add('is-loading'));
+      video.addEventListener('pause', () => wrapper.classList.remove('is-loading'));
       video.controls = true;
       video.playsInline = true;
       video.preload = 'auto';
