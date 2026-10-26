@@ -944,6 +944,14 @@ html.menu-open { overflow: hidden; }
 .video.is-playing .video__play,
 .video.is-playing .video__title,
 .video.is-playing .video__label { opacity: 0; pointer-events: none; }
+/* Capas com título e play já desenhados na imagem (prints do Instagram):
+   o anel do HTML só aparece girando enquanto o vídeo carrega, e a imagem
+   fica parada para não cortar o texto das bordas */
+.video--baked .video__play { opacity: 0; }
+.video--baked picture { animation: none !important; transform: none !important; }
+@media (hover: hover) {
+  .video--baked:hover img { transform: scale(1.02); }
+}
 /* Enquanto o vídeo baixa os primeiros segundos, o anel gira por cima dele */
 .video.is-playing.is-loading .video__play { opacity: 1; z-index: 3; pointer-events: none; }
 .video.is-loading .video__play .icon { opacity: 0; }
